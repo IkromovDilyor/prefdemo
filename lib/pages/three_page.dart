@@ -25,8 +25,12 @@ class _ThreePageState extends State<ThreePage> {
 
   void _doLogin(){
     String email=emailController.text.toString().trim();
+    String name=nameController.text.toString().trim();
+    String confirm=confirmController.text.toString().trim();
     String password=passwordController.text.toString().trim();
-    User user =User.from(email:email,password: password);
+    int  phone=phoneController.text.toString().trim() as int;
+
+    User user =User.from(email:email,password: password,phone:phone,name: name,confirm:confirm);
     Prefs.storeUser(user);
   }
   @override
@@ -185,7 +189,14 @@ class _ThreePageState extends State<ThreePage> {
                     color: Colors.blue[700]
                   ),
                   child:Center(
-                    child:  Text("Create",style: TextStyle(color: Colors.white,fontSize: 25),),
+                    child:  FlatButton(
+                      onPressed: (){
+                        _doLogin;
+                      },
+                      child: Center(
+                        child: Text("Create",style: TextStyle(color: Colors.white,fontSize: 25),),
+                      )
+                    )
                   ),
                 ),
                 SizedBox(height: 30,),
